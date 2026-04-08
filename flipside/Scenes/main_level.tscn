@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://d3rt5d0lm1sby"]
+
+[ext_resource type="PackedScene" uid="uid://bc7xny8vikk2y" path="res://Scenes/player_character.tscn" id="1_q2fht"]
+
+[node name="Main Level" type="Node3D" unique_id=364428611]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1811051395]
+transform = Transform3D(1, 0, 0, 0, 0.9950556, 0.099319756, 0, -0.099319756, 0.9950556, 0, 0, 11)
+light_color = Color(1, 1, 0.8352941, 1)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1947886965]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=608503216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 0)
+size = Vector3(44, 1, 10)
+
+[node name="Floor2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=102740742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
+size = Vector3(17, 1, 10)
+
+[node name="Boundry wall" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1610729689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4995, 5.5, 0)
+visible = false
+size = Vector3(0.001, 10, 10)
+
+[node name="Boundry wall2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1214008322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 5.5, 5)
+visible = false
+size = Vector3(44, 10, 0.001)
+
+[node name="Boundry wall3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1644845127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 5.5, -5)
+visible = false
+size = Vector3(44, 10, 0.001)
+
+[node name="Boundry wall4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1069588555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5005, 5.5, 0)
+visible = false
+size = Vector3(0.001, 10, 10)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1326609739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 0)
+size = Vector3(1, 1, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1541967506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, 4.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1189487129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0.5)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D" unique_id=818663796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, -3)
+
+[node name="PlayerCharacter" parent="." unique_id=1367024782 instance=ExtResource("1_q2fht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCharacter" unique_id=457293936]
+transform = Transform3D(0.8660254, 0.25, -0.4330127, 0, 0.8660254, 0.5, 0.5, -0.4330127, 0.75, -3.2751465, 3.2190046, 5.6009808)
+
+[node name="2D Camera" type="Camera3D" parent="PlayerCharacter" unique_id=957187043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.5004168)
+projection = 1
+size = 5.0
+
+[node name="3D Camera (Overlayed2D)" type="Camera3D" parent="PlayerCharacter" unique_id=1156213512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6.5004168)
+size = 5.0

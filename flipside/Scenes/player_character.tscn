@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bc7xny8vikk2y"]
+
+[ext_resource type="Texture2D" uid="uid://br4nsfk5wn1sw" path="res://Assets/2D Resources/characters/DinoSprites - doux.png" id="1_qcwfp"]
+
+[sub_resource type="GDScript" id="GDScript_qcwfp"]
+resource_name = "player_script"
+script/source = "extends CharacterBody3D
+
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"Player_Jump\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"Player_Walk_Left\", \"Player_Walk_Right\", \"Player_Walk_Forward\", \"Player_Walk_Backward\")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcwfp"]
+atlas = ExtResource("1_qcwfp")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmdk4"]
+atlas = ExtResource("1_qcwfp")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0f8b"]
+atlas = ExtResource("1_qcwfp")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wko77"]
+atlas = ExtResource("1_qcwfp")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ons1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcwfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmdk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0f8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wko77")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ajo0r"]
+radius = 0.2109375
+height = 0.5172119
+
+[node name="PlayerCharacter" type="CharacterBody3D" unique_id=1367024782]
+script = SubResource("GDScript_qcwfp")
+
+[node name="Pivot Controller" type="Node3D" parent="." unique_id=1772470332]
+
+[node name="Player Sprite" type="AnimatedSprite3D" parent="Pivot Controller" unique_id=1409014598]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ons1q")
+frame_progress = 0.7330368
+
+[node name="Player Collision" type="CollisionShape3D" parent="." unique_id=422149388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.011657715, 0)
+shape = SubResource("CapsuleShape3D_ajo0r")
